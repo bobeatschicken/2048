@@ -32,7 +32,6 @@ public class Grid {
   }
   
   public void initBlocks() {
-    // YOU WRITE THIS
     for (int col = 0; col < COLS; col++) {
       for (int row = 0; row < ROWS; row++) {
         setBlock(col, row);
@@ -41,7 +40,6 @@ public class Grid {
   }
   
   public boolean isValid(int col, int row) {
-    // YOU WRITE THIS
     if (col < COLS && col >= 0 && row < ROWS && row >= 0){
       return true;
     } else{
@@ -50,7 +48,6 @@ public class Grid {
   }
   
   public void swap(int col1, int row1, int col2, int row2) {
-    // YOU WRITE THIS
     Block block1 = getBlock(col1, row1);
     Block block2 = getBlock(col2, row2);
     setBlock(col2, row2, block1);
@@ -58,7 +55,6 @@ public class Grid {
   }
   
   public boolean canMerge(int col1, int row1, int col2, int row2) {
-    // YOU WRITE THIS
     Block block1 = getBlock(col1, row1);
     Block block2 = getBlock(col2, row2);
     if (block1.getValue() == block2.getValue() && !block1.isEmpty() && !block2.isEmpty()){
@@ -78,7 +74,6 @@ public class Grid {
  
   // Is there an open space on the grid to place a new block?
   public boolean canPlaceBlock() {
-    // YOU WRITE THIS
     if (getEmptyLocations().size() > 0) {
       return true;
     } else {
@@ -87,8 +82,6 @@ public class Grid {
   }
   
   public ArrayList<Location> getEmptyLocations() {
-    // Put all locations that are currently empty into locs
-    // YOU WRITE THIS
     ArrayList<Location> emptyLocations = new ArrayList<Location>();
     for (int col = 0; col < COLS; col++) {
       for (int row = 0; row < ROWS; row++) {
@@ -101,7 +94,6 @@ public class Grid {
   }
   
   public Location selectLocation(ArrayList<Location> locs) {
-    // YOU WRITE THIS
     int index = int (random(0, locs.size()));
     
     return locs.get(index);
@@ -109,7 +101,6 @@ public class Grid {
   
   // Randomly select an open location to place a block.
   public void placeBlock() {
-    // YOU WRITE THIS
     ArrayList<Location> locs = getEmptyLocations();
     
     Location location = new Location(selectLocation(locs).getCol(), selectLocation(locs).getRow());
@@ -117,10 +108,8 @@ public class Grid {
     int random = int(random(1, 9));
     if (random <= 7 && block[location.getCol()][location.getRow()].isEmpty()) {
       setBlock(location.getCol(), location.getRow(), 2);
-      //System.out.println("block placed at " + location.getCol() + ", " + location.getRow() + ". Value: 2");
     } else if (random == 8 && block[location.getCol()][location.getRow()].isEmpty()){
       setBlock(location.getCol(), location.getRow(), 4);
-      //System.out.println("block placed at " + location.getCol() + ", " + location.getRow() + ". Value: 2");
     } else {
       placeBlock();
     }
@@ -129,7 +118,6 @@ public class Grid {
   
   // Are there any adjacent blocks that contain the same value?
   public boolean hasCombinableNeighbors() {
-    // YOU WRITE THIS
     int comparableNeighbors = 0;
     for (int col = 1; col < COLS - 1; col++) {
       for (int row = 1; row < ROWS - 1; row++) {
@@ -159,24 +147,16 @@ public class Grid {
   }
   
    
-  // Notice how an enum can be used as a data type
-  //
-  // This is called ) method  the KeyEvents tab
+
   public boolean someBlockCanMoveInDirection(DIR dir) {
-    // YOU WRITE THIS
     boolean canMove = false;
     if (dir == DIR.NORTH) {
       for (int col = 0; col < COLS; col++) {
       for (int row = ROWS - 1; row > 0; row--) {
         if (canMerge(col, row, col, row-1) || (!block[col][row].isEmpty() && block[col][row-1].isEmpty())) {
-          //System.out.println("canMove");
           canMove = true;
           break;
-        } //else if(!block[i][j].isEmpty() && block[i][j-1].isEmpty()) {
-        //  System.out.println("canMove");
-        //  canMove = true;
-        //  break;
-        //}
+        }
       }
     }
      return canMove;
@@ -184,14 +164,9 @@ public class Grid {
       for (int col = 0; col < COLS - 1; col++) {
         for (int row = 0; row < ROWS; row++) {
           if (canMerge(col, row, col+1, row) || (!block[col][row].isEmpty() && block[col+1][row].isEmpty())) {
-           // System.out.println("canMove");
             canMove = true;
             break;
-          } //else if (!block[i][j].isEmpty() && block[i+1][j].isEmpty()) {
-          //  System.out.println("canMove");
-          //  canMove = true;
-          //  break;
-          //}
+          } 
         }
       }
 
@@ -200,14 +175,9 @@ public class Grid {
       for (int col = 0; col < COLS; col++) {
         for (int row = 0; row < ROWS - 1; row++) {
           if (canMerge(col, row, col, row+1) || (!block[col][row].isEmpty() && block[col][row+1].isEmpty())) {
-          //  System.out.println("canMove");
             canMove = true;
             break;
-          } //else if (!block[i][j].isEmpty() && block[i][j+1].isEmpty()) {
-          //  System.out.println("canMove");
-          //  canMove = true;
-          //  break;
-          //}
+          }
         }
       }
       return canMove;
@@ -218,11 +188,7 @@ public class Grid {
           //  System.out.println("canMove");
             canMove = true;
             break;
-          } //else if (!block[i][j].isEmpty() && block[i-1][j].isEmpty()) {
-          //  System.out.println("canMove");
-          //  canMove = true;
-          //  break;
-          //}
+          }
         }
       }
       return canMove;
@@ -234,7 +200,6 @@ public class Grid {
   
   // Computes the number of points that the player has scored
   public void computeScore() {
-    // YOU WRITE THIS
     int gameScore = 0;
     for (int col = 0; col < COLS; col++) {
       for (int row = 0; row < ROWS; row++) {
@@ -275,17 +240,10 @@ public class Grid {
   
   // Copy the contents of another grid to this one
   public void gridCopy(Grid other) {
-    // YOU WRITE THIS
-    //for (int i = 0; i < other.COLS; i++) {
-    //  for (int j = 0; j < other.ROWS; j++) {
-    //    getBlock(i, j);
-    //  }
-    //}
     block = other.block;
   }
   
   public boolean isGameOver() {
-    // YOU WRITE THIS
     if (!someBlockCanMoveInDirection(DIR.NORTH) && !canPlaceBlock() && !hasCombinableNeighbors()) {
       return true;
     } else if (!someBlockCanMoveInDirection(DIR.EAST) && !canPlaceBlock() && !hasCombinableNeighbors()) {
@@ -303,15 +261,4 @@ public class Grid {
     fill(#0000BB);
     text("GAME OVER", GRID_X_OFFSET + 2*BLOCK_SIZE + 15, GRID_Y_OFFSET + 2*BLOCK_SIZE + 15);
   }
-  
-  //public String toString() {
-  //  String str = "";
-  //  for (int row = 0; row < ROWS; row++) {
-  //    for (int col = 0; col < COLS; col++) {
-  //      str += block[col][row].getValue() + " ";
-  //    }
-  //    str += "\n";   // "\n" is a newline character
-  //  }
-  //  return str;
-  //}
 }

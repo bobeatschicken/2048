@@ -1,4 +1,3 @@
-// You are not allowed to change this file.
 
 public class Block
 {

@@ -1,6 +1,5 @@
 // Used to store grid information about blocks that need to move after a key press.
-//
-// Do not change this file.
+
 public class Animation
 {
   private int fromCol;

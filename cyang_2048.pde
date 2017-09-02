@@ -42,16 +42,14 @@ public void setup()
   
   scoreFont = createFont("LucidaSans", 42);
 
-  // Comment out this setBlock() and replace it with a placeBlock() once you have
-  // written placeBlock().
+
   grid.placeBlock();
   System.out.print(grid);
   backup_grid.gridCopy(grid); 
   // save grid in backup_grid in case Undo is needed
 }
 
-// This is where the animation will take place
-// draw() exhibits the behavior of being inside an infinite loop
+
 public void draw() {  
   background(BACKGROUND_COLOR);
   grid.computeScore();
@@ -74,10 +72,7 @@ public void draw() {
     }
     
     
-    // animation_ticks is used to count up to TICK_STEPS, which
-    // determines how many
-    
-    // Iterate on the anims ArrayList to 
+
     for(int i = 0; i < anims.size(); i++) {
       Animation a = anims.get(i);
       float col = 1.0 * ((a.getToCol() - a.getFromCol())*animation_ticks)/TICK_STEPS + a.getFromCol();
